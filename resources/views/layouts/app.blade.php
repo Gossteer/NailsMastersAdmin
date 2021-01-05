@@ -22,35 +22,7 @@
     </head>
     <body class="{{ $class ?? '' }}">
         @auth()
-            <div class="wrapper">
-                    @include('layouts.navbars.sidebar')
-                <div class="main-panel">
-                    @include('layouts.navbars.navbar')
-
-                    <div class="content">
-                        @yield('content')
-                    </div>
-
-                    @include('layouts.footer')
-                </div>
-            </div>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-        @else
-            @include('layouts.navbars.navbar')
-            <div class="wrapper wrapper-full-page">
-                <div class="full-page {{ $contentClass ?? '' }}">
-                    <div class="content">
-                        <div class="container">
-                            @yield('content')
-                        </div>
-                    </div>
-                    @include('layouts.footer')
-                </div>
-            </div>
-        @endauth
-        <div class="fixed-plugin">
+                <div class="fixed-plugin">
             <div class="dropdown show-dropdown">
                 <a href="#" data-toggle="dropdown">
                 <i class="fa fa-cog fa-2x"> </i>
@@ -87,6 +59,36 @@
                 </ul>
             </div>
         </div>
+            <div class="wrapper">
+                    @include('layouts.navbars.sidebar')
+                <div class="main-panel">
+                    @include('layouts.navbars.navbar')
+
+                    <div class="content">
+                        @yield('content')
+                    </div>
+
+                    @include('layouts.footer')
+                </div>
+            </div>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        @else
+            @include('layouts.navbars.navbar')
+            <div class="wrapper wrapper-full-page">
+                <div class="full-page {{ $contentClass ?? '' }}">
+                    <div class="content">
+                        <div class="container">
+                            @yield('content')
+                        </div>
+                    </div>
+                    @include('layouts.footer')
+                </div>
+            </div>
+        @endauth
+
+
         <script src="{{ asset('black') }}/js/core/jquery.min.js"></script>
         <script src="{{ asset('black') }}/js/core/popper.min.js"></script>
         <script src="{{ asset('black') }}/js/core/bootstrap.min.js"></script>
