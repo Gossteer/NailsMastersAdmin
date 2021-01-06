@@ -37,3 +37,19 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
 
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('/masters/updateStatus', [App\Http\Controllers\MasterAdminController::class, 'updateStatus'])->name('master.updateStatus');
+    Route::get('/masters', [App\Http\Controllers\MasterAdminController::class, 'index'])->name('masters.index');
+    Route::get('/masters/{master}',[App\Http\Controllers\MasterAdminController::class, 'show'])->name('masters.index.show');
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/nailJobs', [App\Http\Controllers\NailJobsAdminController::class, 'index'])->name('nailJobs.index');
+    Route::post('/nailJobs/updateStatus',[App\Http\Controllers\NailJobsAdminController::class, 'updateStatus'])->name('nailJobs.updateStatus');
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('/masterPoints/updateStatus',[App\Http\Controllers\MasterPointsAdminController::class, 'updateStatus'])->name('masterPoints.updateStatus');
+    Route::get('/masterPoints',[App\Http\Controllers\MasterPointsAdminController::class, 'index'])->name('masterPoints.index');
+});
+

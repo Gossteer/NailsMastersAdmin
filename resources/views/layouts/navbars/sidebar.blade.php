@@ -8,7 +8,25 @@
             <li @if ($pageSlug == 'dashboard') class="active " @endif>
                 <a href="{{ route('home') }}">
                     <i class="tim-icons icon-chart-pie-36"></i>
-                    <p>{{ __('Dashboard') }}</p>
+                    <p>{{ __('sidebar.Dashboard') }}</p>
+                </a>
+            </li>
+            <li @if ($pageSlug == 'masters.index') class="active " @endif>
+                <a href="{{ route('masters.index') }}">
+                    <i class="tim-icons icon-pin"></i>
+                    <p>{{ __('sidebar.Masters') }}</p>
+                </a>
+            </li>
+            <li @if ($pageSlug == 'masterPoints.index') class="active " @endif>
+                <a href="{{ route('masterPoints.index') }}">
+                    <i class="tim-icons icon-pin"></i>
+                    <p>{{ __('sidebar.MasterPoints') }}</p>
+                </a>
+            </li>
+            <li @if ($pageSlug == 'nailJobs.index') class="active " @endif>
+                <a href="{{ route('nailJobs.index') }}">
+                    <i class="tim-icons icon-pin"></i>
+                    <p>{{ __('sidebar.NailJobs') }}</p>
                 </a>
             </li>
             <li>

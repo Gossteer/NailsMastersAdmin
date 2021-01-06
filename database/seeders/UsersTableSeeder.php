@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Admin Admin',
             'email' => 'admin@black.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('secret'),
+            'password' => Hash::make('123'),
             'created_at' => now(),
             'updated_at' => now()
         ]);
