@@ -19,6 +19,7 @@
         <!-- CSS -->
         <link href="{{ asset('black') }}/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
         <link href="{{ asset('black') }}/css/theme.css" rel="stylesheet" />
+        @livewireStyles
     </head>
     <body class="{{ $class ?? '' }}">
         @auth()
@@ -204,5 +205,6 @@
             });
         </script>
         @stack('js')
+        @livewireScripts
     </body>
 </html>
