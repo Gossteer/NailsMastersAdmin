@@ -18,6 +18,9 @@ return [
         'post' => [
             'GetToken' => 'http://nailsmasterstest.com.xsph.ru/api/loginadmin',
             'ApiLogout' => 'http://nailsmasterstest.com.xsph.ru/api/logout'
+        ],
+        'get' => [
+            'MasterIndex' => 'http://nailsmasterstest.com.xsph.ru/api/masterindex'
         ]
     ]
 

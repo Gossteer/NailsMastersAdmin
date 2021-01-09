@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 // use App\MasterPoint;
+
+use App\Models\MasterPoint;
 use Illuminate\Http\Request;
 
 class MasterPointsAdminController extends Controller
@@ -42,7 +44,7 @@ class MasterPointsAdminController extends Controller
         // dd(json_decode($response1, true), $response1->json());
         // $master = User::find(1);
 
-        return view('masterpoints.masterpoints', ['masterpoints' => MasterPoint::all()->sortByDesc('created_at')]);
+        return view('pages.masterpoints.masterpoints', ['masterpoints' => MasterPoint::all()->sortByDesc('created_at')]);
         // return response()->file(storage_path('/app/private/' . $master->master->image));
     }
 

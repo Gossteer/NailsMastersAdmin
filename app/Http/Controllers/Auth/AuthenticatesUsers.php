@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\CryptValue;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -87,11 +88,13 @@ trait AuthenticatesUsers
         }
 
 
-        $request['token'] = $response['token'];
+        $request['token'] = CryptValue::encrypting($response['token']);
+
 
 
         return 1;
     }
+
 
     /**
      * Validate the user login request.

@@ -13,13 +13,13 @@
             </li>
             <li @if ($pageSlug == 'masters.index') class="active " @endif>
                 <a href="{{ route('masters.index') }}">
-                    <i class="tim-icons icon-pin"></i>
+                    <i class="tim-icons icon-single-02"></i>
                     <p>{{ __('sidebar.Masters') }}</p>
                 </a>
             </li>
             <li @if ($pageSlug == 'masterPoints.index') class="active " @endif>
                 <a href="{{ route('masterPoints.index') }}">
-                    <i class="tim-icons icon-pin"></i>
+                    <i class="tim-icons icon-image-02"></i>
                     <p>{{ __('sidebar.MasterPoints') }}</p>
                 </a>
             </li>
@@ -27,6 +27,12 @@
                 <a href="{{ route('nailJobs.index') }}">
                     <i class="tim-icons icon-pin"></i>
                     <p>{{ __('sidebar.NailJobs') }}</p>
+                </a>
+            </li>
+            <li @if ($pageSlug == 'maps') class="active " @endif>
+                <a class="disabled" href="{{ route('pages.maps') }}">
+                    <i class="tim-icons icon-square-pin"></i>
+                    <p>{{ __('sidebar.Maps') }}</p>
                 </a>
             </li>
             <li>
@@ -57,12 +63,6 @@
                 <a href="{{ route('pages.icons') }}">
                     <i class="tim-icons icon-atom"></i>
                     <p>{{ __('Icons') }}</p>
-                </a>
-            </li>
-            <li @if ($pageSlug == 'maps') class="active " @endif>
-                <a href="{{ route('pages.maps') }}">
-                    <i class="tim-icons icon-pin"></i>
-                    <p>{{ __('Maps') }}</p>
                 </a>
             </li>
             <li @if ($pageSlug == 'notifications') class="active " @endif>

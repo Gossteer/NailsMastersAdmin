@@ -16,5 +16,6 @@ return [
     'MasterPoints' => 'Точки',
     'Masters' => 'Мастера',
     'NailJobs' => 'Ногти',
-    'Dashboard' => 'Главная'
+    'Dashboard' => 'Главная',
+    'Maps' => 'Карта'
 ];

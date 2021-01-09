@@ -19,6 +19,7 @@
         <!-- CSS -->
         <link href="{{ asset('black') }}/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
         <link href="{{ asset('black') }}/css/theme.css" rel="stylesheet" />
+        @stack('styles')
         @livewireStyles
     </head>
     <body class="{{ $class ?? '' }}">
@@ -80,7 +81,7 @@
             <div class="wrapper wrapper-full-page">
                 <div class="full-page {{ $contentClass ?? '' }}">
                     <div class="content">
-                        <div class="container">
+                        <div class="container-sm">
                             @yield('content')
                         </div>
                     </div>
