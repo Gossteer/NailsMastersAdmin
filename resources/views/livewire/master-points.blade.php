@@ -17,8 +17,11 @@
                 <h2><a><span>{{$MasterPointView->address}}</span><small>Адрес</small></a></h2>
             </div>
             <div class="follow-info">
-                <h2><a><span>{{$MasterPointView->created_at->format('d.m.y')}}</span><small>Создание точки</small></a></h2>
+                <h2><a><span>{{$MasterPointView->nailsJobs->count()}}</span><small>Количество ногтей</small></a></h2>
                 <h2 ><a ><span class="{{$MasterPointView->status ? '' : 'text-danger'}}" id="confirmationspan{{$MasterPointView->id}}">{{$MasterPointView->status ? 'Да' : 'Нет'}}</span><small >Подтверждение</small></a></h2>
+            </div>
+            <div class="follow-info">
+                <h2><a><span>{{$MasterPointView->created_at->format('d.m.y')}}</span><small>Создание точки</small></a></h2>
             </div>
             <div class="follow-btn">
                 <button onclick="update(this, confirmationspan{{$MasterPointView->id}})" data-masterpointid="{{$MasterPointView->id}}" data-status="{{$MasterPointView->status}}">{{$MasterPointView->status ? 'Отозвать' : 'Одобрить'}}</button>
