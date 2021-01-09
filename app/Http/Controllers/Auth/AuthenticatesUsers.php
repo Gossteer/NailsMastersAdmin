@@ -83,6 +83,8 @@ trait AuthenticatesUsers
             'password' => $request->password
         ]);
 
+        dd($response, config('api.server_1.post.GetToken'), $request[$this->username()], $request->password);
+
         if ($response->status() != 200) {
             return 0;
         }
