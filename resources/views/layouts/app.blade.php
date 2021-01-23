@@ -8,6 +8,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"></script>
         <title>{{ config('app.name', 'Black Dashboard') }}</title>
         <!-- Favicon -->
         <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('black') }}/img/apple-icon.png">

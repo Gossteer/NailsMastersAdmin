@@ -1,0 +1,7 @@
+php artisan serve  
+php artisan queue:work
+laravel-echo-server start
+
+https://beyondco.de/docs/laravel-websockets/getting-started/installation
+
+https://www.youtube.com/watch?v=oUOQzx60zYY&ab_channel=CursosDesarrolloWeb
