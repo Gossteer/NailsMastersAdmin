@@ -30,7 +30,7 @@ class Masterindex extends Component
     {
         //Когда будет репликация
         // dd($this->userMaster);
-        // event(new Test());
+        event(new Test());
         $this->userMaster->master->status = $this->userMaster->master->status == 1 ? 0 : 1;
         $this->userMaster->master->save();
     }
