@@ -44,7 +44,7 @@
                 <button wire:click="setStatus()">{{$userMaster->master->status ? 'Отозвать' : 'Одобрить'}}</button>
             </div>
         </div>
-        <div class="desc ">Описание: {{$testpusher}}</div>
+        <div class="desc ">Описание: {{$userMaster->master->portfolio->description}}</div>
         {{-- {{ \HTML::image('/storage/app/private/'.$userMaster->master->image, "My logo") }} --}}
         {{-- <img src="{{URL::to('/storage/app/private/'.$userMaster->master->image)}}" alt="альтернативный текст"> --}}
 

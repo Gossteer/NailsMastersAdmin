@@ -9,9 +9,9 @@ class Masterindex extends Component
 {
     // public $master;
     public $userMaster;
-    public $testpusher;
+    // public $testpusher;
 
-    protected $listeners = ['echo:channel,Test' => 'render'];
+    // protected $listeners = ['echo:channel,Test' => 'render'];
 
     public function render()
     {
@@ -20,7 +20,7 @@ class Masterindex extends Component
 
     public function mount()
     {
-        $this->testpusher = 0;
+        // $this->testpusher = 0;
         // $this->userMaster = new UserMaster($this->master);
         // dd($this->userMaster);
     }
@@ -30,15 +30,15 @@ class Masterindex extends Component
     {
         //Когда будет репликация
         // dd($this->userMaster);
-        event(new Test());
+        // event(new Test());
         $this->userMaster->master->status = $this->userMaster->master->status == 1 ? 0 : 1;
         $this->userMaster->master->save();
     }
 
-    public function testfunc()
-    {
-        $this->testpusher = 1;
-    }
+    // public function testfunc()
+    // {
+    //     $this->testpusher = 1;
+    // }
 
 
 }
