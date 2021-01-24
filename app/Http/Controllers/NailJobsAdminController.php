@@ -46,7 +46,7 @@ class NailJobsAdminController extends Controller
         // dd(json_decode($response1, true), $response1->json());
         // $master = User::find(1);
         // dd(NailsJobs::all()->sortByDesc('created_at'));
-        return view('pages.nailjobs.nailjobs', ['nailjobs' => NailsJobs::all()->sortByDesc('created_at')]);
+        return view('pages.nailjobs.nailjobs', ['nailjobs' => NailsJobs::paginate(30)]);
         // return response()->file(storage_path('/app/private/' . $master->master->image));
     }
 

@@ -13,6 +13,9 @@
             {{-- <img src="{{$master->master->image ? route('storage.gallery.filee', ['file' => $master->master->image]) : ''}}" /> --}}
         @endforeach
     </div>
+    <div class="row justify-content-center mt-4">
+        {{ $nailjobs->links() }}
+    </div>
 </div>
 
 @push('styles')
