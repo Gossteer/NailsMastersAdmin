@@ -11,7 +11,7 @@
         <div class="actions">
             <div class="follow-info">
                 {{-- <h2><a href="#"><span>{{$master->master->masterPoint->count()}}</span><small>Точек</small></a></h2> --}}
-                <h2><a href="https://www.instagram.com/{{$NailsJobsView->instagram}}/"><span>{{$NailsJobsView->name}}</span><small>Название</small></a></h2>
+                <h2><a href="https://www.instagram.com/{{$NailsJobsView->instagram}}/" target="_blank"><span>{{$NailsJobsView->name}}</span><small>Название</small></a></h2>
             </div>
             <div class="follow-info">
                 <h2><a><span>{{$NailsJobsView->categoryNails->name ?? 'Отсутствует'}}</span><small>Категория</small></a></h2>
