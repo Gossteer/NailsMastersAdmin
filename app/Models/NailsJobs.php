@@ -21,7 +21,8 @@ class NailsJobs extends Model
         'description',
         'logical_delet',
         'name',
-        'status'
+        'status',
+        'instagram'
     ];
 
     protected $table = 'nails_jobs';
