@@ -17,7 +17,15 @@ class NailsJobs extends Component
     {
         //Когда будет репликация
         // dd($this->userMaster);
-        $this->NailsJobsView->status = $this->userMaster->master->status == 1 ? 0 : 1;
-        $this->NailsJobsView->status->save();
+        $this->NailsJobsView->status = $this->NailsJobsView->status == 1 ? 0 : 1;
+        $this->NailsJobsView->save();
+    }
+
+    public function deleteNailsJobs()
+    {
+        //Когда будет репликация
+        // dd($this->userMaster);
+        // $this->NailsJobsView->status = $this->NailsJobsView->status == 1 ? 0 : 1;
+        $this->NailsJobsView->delete();
     }
 }

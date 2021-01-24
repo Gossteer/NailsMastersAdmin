@@ -1,4 +1,4 @@
-<div class="col-md-3">
+<div class="col-md-3" id="NailsJobs{{$NailsJobsView->id}}">
     @csrf
     <div class="cardForAdmin">
         <div class="banner" style="background-image: url({{$NailsJobsView->image}})">
@@ -20,8 +20,9 @@
                 <h2><a><span>{{$NailsJobsView->created_at->format('d.m.y')}}</span><small>Создание работы</small></a></h2>
                 <h2 ><a ><span class="{{$NailsJobsView->status ? '' : 'text-danger'}}" id="confirmationspan{{$NailsJobsView->id}}">{{$NailsJobsView->status ? 'Да' : 'Нет'}}</span><small >Подтверждение</small></a></h2>
             </div>
-            <div class="follow-btn">
-                <button onclick="update(this, confirmationspan{{$NailsJobsView->id}})" data-nailjobid="{{$NailsJobsView->id}}" data-status="{{$NailsJobsView->status}}">{{$NailsJobsView->status ? 'Отозвать' : 'Одобрить'}}</button>
+            <div class="follow-btn row justify-content-around">
+                <button class="col-sm-5" wire:click="setStatus()" >{{$NailsJobsView->status ? 'Отозвать' : 'Одобрить'}}</button>
+                <button class="col-sm-5" wire:click="deleteNailsJobs()" onclick="deleteDiv({{$NailsJobsView->id}})">Удалить</button>
             </div>
         </div>
         <div class="desc">Описание: {{$NailsJobsView->description}}</div>

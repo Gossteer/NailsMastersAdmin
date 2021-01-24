@@ -20,6 +20,14 @@
 @endpush
 
 <script  type="application/javascript">
+
+    function deleteDiv($selector) {
+        document.querySelector("#NailsJobs"+$selector).remove();
+    }
+
+</script>
+
+{{-- <script  type="application/javascript">
 function update(params, spantext) {
     // alert(document.getElementsByName("_token")[0].value);
     // var confirm = params.dataset.confirm;
@@ -58,7 +66,7 @@ function update(params, spantext) {
 
     });
 }
-</script>
+</script> --}}
 
 @endsection
 
