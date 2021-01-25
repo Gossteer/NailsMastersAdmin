@@ -16,6 +16,7 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             'id' => 1,
+            'master_id' => 1,
             'name' => 'Admin Admin',
             'email' => 'admin@admin.com',
             'email_verified_at' => now(),
@@ -23,14 +24,14 @@ class UsersTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
-        DB::table('users')->insert([
-            'id' => 2,
-            'name' => 'Admin Admin',
-            'email' => 'user@admin',
-            'email_verified_at' => now(),
-            'password' => Hash::make('123'),
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        // DB::table('users')->insert([
+        //     'id' => 2,
+        //     'name' => 'Admin Admin',
+        //     'email' => 'user@admin',
+        //     'email_verified_at' => now(),
+        //     'password' => Hash::make('123'),
+        //     'created_at' => now(),
+        //     'updated_at' => now()
+        // ]);
     }
 }

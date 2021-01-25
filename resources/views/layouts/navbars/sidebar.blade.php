@@ -11,12 +11,6 @@
                     <p>{{ __('sidebar.Dashboard') }}</p>
                 </a>
             </li>
-            <li @if ($pageSlug == 'masters.index') class="active " @endif>
-                <a href="{{ route('masters.index') }}">
-                    <i class="tim-icons icon-single-02"></i>
-                    <p>{{ __('sidebar.Masters') }}</p>
-                </a>
-            </li>
             <li @if ($pageSlug == 'masterPoints.index') class="active " @endif>
                 <a href="{{ route('masterPoints.index') }}">
                     <i class="tim-icons icon-image-02"></i>

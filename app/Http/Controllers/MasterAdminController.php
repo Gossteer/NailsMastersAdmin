@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 // use App\Master;
 // use App\User;
 
+use App\Models\Master;
+use Illuminate\Support\Facades\Auth;
 
-use App\Models\UserMaster;
+// use App\Models\UserMaster;
 
 class MasterAdminController extends Controller
 {
@@ -34,7 +36,7 @@ class MasterAdminController extends Controller
         //$masters = //Master::all(); //Http::withToken(Auth::user()->token)->get(config('api.server_1.get.MasterIndex'))->json();
 
 
-        return view('pages.masters.masters', ['masters' => UserMaster::whereNotNull('master_id')->get()->sortByDesc('master.created_at')]);
+        return view('pages.profile.edit', ['master' => Master::find(Auth::user()->master_id)]);
     }
 
     // public function show(int $id)

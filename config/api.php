@@ -16,7 +16,7 @@ return [
     */
     'server_1' => [
         'post' => [
-            'GetToken' => 'http://nailsmasterstest.com.xsph.ru/api/loginadmin',
+            'GetToken' => 'http://nailsmasterstest.com.xsph.ru/api/login-master-admin',
             'ApiLogout' => 'http://nailsmasterstest.com.xsph.ru/api/logout'
         ],
         'get' => [
