@@ -29,6 +29,12 @@
                     <p>{{ __('sidebar.NailJobs') }}</p>
                 </a>
             </li>
+            <li @if ($pageSlug == 'logger.index') class="active " @endif>
+                <a href="{{ route('logger.index') }}">
+                    <i class="tim-icons icon-pin"></i>
+                    <p>{{ __('sidebar.Logger') }}</p>
+                </a>
+            </li>
             <li @if ($pageSlug == 'maps') class="active " @endif>
                 <a class="disabled" href="{{ route('pages.maps') }}">
                     <i class="tim-icons icon-square-pin"></i>

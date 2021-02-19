@@ -47,6 +47,10 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('/logger', [App\Http\Controllers\LoggerShowController::class, 'index'])->name('logger.index');
+});
+
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/nailJobs', [App\Http\Controllers\NailJobsAdminController::class, 'index'])->name('nailJobs.index');
     Route::post('/nailJobs/updateStatus',[App\Http\Controllers\NailJobsAdminController::class, 'updateStatus'])->name('nailJobs.updateStatus');
 });

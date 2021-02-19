@@ -50,6 +50,11 @@ class UserMaster extends Model
         return $this->belongsTo('App\Models\Master');
     }
 
+    public function logger()
+    {
+        return $this->hasMany('App\Models\LoggerShow');
+    }
+
     // public function admin()
     // {
     //     return $this->hasOne('App\Admin');

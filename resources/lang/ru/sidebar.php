@@ -17,5 +17,6 @@ return [
     'Masters' => 'Мастера',
     'NailJobs' => 'Ногти',
     'Dashboard' => 'Главная',
-    'Maps' => 'Карта'
+    'Maps' => 'Карта',
+    'Logger' => 'Логи'
 ];
