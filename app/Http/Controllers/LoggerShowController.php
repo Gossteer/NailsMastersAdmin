@@ -15,7 +15,7 @@ class LoggerShowController extends Controller
 
     public function index()
     {
-        $logger = LoggerShow::with('user', 'nailsJobs')->paginate(30);
+        $logger = LoggerShow::orderByDesc('created_at')->with('user', 'nailsJobs')->paginate(30);
 
         $today_tour = Carbon::now();
         $carbon_statistik_add = Carbon::create($today_tour->format('Y'), 1, 1, 00, 0, 0);
