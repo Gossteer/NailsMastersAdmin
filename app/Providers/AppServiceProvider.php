@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\Logger\iLoggerConfig;
+use App\Services\Logger\LoggerConfig;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
 
     /**
@@ -25,5 +27,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
+
+
     }
 }

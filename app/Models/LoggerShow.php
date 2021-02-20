@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Services\Logger\iLoggerConfig;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class LoggerShow extends Model
 {
@@ -20,12 +22,12 @@ class LoggerShow extends Model
         'nails_jobs_id',
     ];
 
-    private $type_id_config;
+    // private $type_id_config;
 
-    public function __construct()
-    {
-        $this->type_id_config = config('logger.type_id');
-    }
+    // public function __construct()
+    // {
+    //     $this->type_id_config = config('logger.type_id');
+    // }
 
     public function user()
     {
@@ -39,7 +41,7 @@ class LoggerShow extends Model
 
     public function getTypeAttribute()
     {
-        return $this->type_id_config[(int) $this->type_id];
+        return App::make(iLoggerConfig::class)->getTypeConfig((int) $this->type_id);
     }
 
     protected function serializeDate(DateTimeInterface $date)
