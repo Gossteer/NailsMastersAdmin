@@ -42,7 +42,7 @@
                                             {{$logger->user->email}}
                                         </td>
                                         <td>
-                                            {{$logger->nailsJobs->instagram ?? null}}
+                                            <a href="https://www.instagram.com/{{$logger->nailsJobs->instagram ?? null}}" target="__blank">{{$logger->nailsJobs->instagram ?? null}}</a>
                                         </td>
                                         <td>
                                             {{$logger->created_at}}
