@@ -31,7 +31,7 @@
             </li>
             <li @if ($pageSlug == 'logger.index') class="active " @endif>
                 <a href="{{ route('logger.index') }}">
-                    <i class="tim-icons icon-pin"></i>
+                    <i class="tim-icons icon-headphones"></i>
                     <p>{{ __('sidebar.Logger') }}</p>
                 </a>
             </li>
