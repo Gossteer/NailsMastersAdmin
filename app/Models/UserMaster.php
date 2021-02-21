@@ -52,7 +52,7 @@ class UserMaster extends Model
 
     public function logger()
     {
-        return $this->hasMany('App\Models\LoggerShow');
+        return $this->hasMany('App\Models\LoggerShow', 'user_id');
     }
 
     // public function admin()

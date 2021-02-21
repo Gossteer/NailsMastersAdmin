@@ -31,7 +31,7 @@ class LoggerShow extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\UserMaster');
+        return $this->belongsTo('App\Models\UserMaster', 'user_id');
     }
 
     public function nailsJobs()

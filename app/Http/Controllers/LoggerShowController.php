@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\LoggerShow;
+use App\Models\UserMaster;
 use Carbon\Carbon;
 use App\Services\Paginator\PaginateForCollection;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class LoggerShowController extends Controller
@@ -17,6 +19,27 @@ class LoggerShowController extends Controller
     public function index()
     {
         $logger = LoggerShow::orderByDesc('created_at')->with('user', 'nailsJobs')->get();
+        // $logger = new Collection();
+        // $fullexperiences = UserMaster::with('master.masterPoint.nailsJobs', 'logger.nailsJobs', 'logger.user')->get();
+        $fullexperiences = UserMaster::with('master.masterPoint.nailsJobs')->get();
+
+        $fullexperiencearray['Masters'] = 0;
+        $fullexperiencearray['Points'] = 0;
+        $fullexperiencearray['Nails'] = 0;
+        $fullexperiencearray['Users'] = $fullexperiences->count();
+
+        foreach ($fullexperiences as $fullexperience) {
+            // if ($fullexperience->logger->count()) {
+            //     $logger = $logger->merge($fullexperience->logger->toBase());
+            // }
+            if ($fullexperience->master ?? false) {
+                $fullexperiencearray['Points'] += $fullexperience->master->masterPoint->count();
+                foreach ($fullexperience->master->masterPoint as $masterPoint) {
+                    $fullexperiencearray['Nails']  += $masterPoint->nailsJobs->count();
+                }
+                $fullexperiencearray['Masters']++;
+            }
+        }
 
         $today_tour = Carbon::now();
         $carbon_statistik_add = Carbon::create($today_tour->format('Y'), 1, 1, 00, 0, 0);
@@ -40,7 +63,7 @@ class LoggerShowController extends Controller
             json_encode($type_id_loadingnailsjobs,JSON_NUMERIC_CHECK),
             json_encode($type_id_redirecttoinstagram,JSON_NUMERIC_CHECK),
             json_encode($type_id_addfavoritenailsjobs,JSON_NUMERIC_CHECK),
-        ]]);
+        ], 'fullexperiencearray' => $fullexperiencearray]);
     }
 
 

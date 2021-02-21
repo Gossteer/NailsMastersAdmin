@@ -62,9 +62,13 @@
             <div class="card card-chart">
                 <div class="card-header ">
                     <div class="row">
-                        <div class="col-sm-6 text-left">
+                        <div class="col-sm-3 text-left">
                             <h3 class="card-category">Полная статистика действий</h3>
                             <h2 class="card-title"><i class="tim-icons icon-send text-success"></i> {{$loggers->total()}}</h2>
+                        </div>
+                        <div class="col-sm-3 text-left">
+                            <h3 class="card-category">Выбранная статистика</h3>
+                            <h2 class="card-title" id="loggercanvascountselectoption"><i class="tim-icons icon-cloud-download-93 text-success"></i>{{array_sum(json_decode($canvas[2]))}}</h2>
                         </div>
                         <div class="col-sm-6">
                             <div class="btn-group btn-group-toggle float-right"  data-toggle="buttons">
@@ -73,13 +77,6 @@
                                     <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Авторизаций</span>
                                     <span class="d-block d-sm-none">
                                         <i class="tim-icons icon-button-power"></i>
-                                    </span>
-                                </label>
-                                <label class="btn btn-sm btn-primary btn-simple" onclick="changeCanvas(1)" id="1">
-                                    <input type="radio" class="d-none d-sm-none" name="options">
-                                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Регистраций</span>
-                                    <span class="d-block d-sm-none">
-                                        <i class="tim-icons icon-simple-add"></i>
                                     </span>
                                 </label>
                                 <label class="btn btn-sm btn-primary btn-simple active" onclick="changeCanvas(2)" id="2">
@@ -103,13 +100,33 @@
                                         <i class="tim-icons icon-shape-star"></i>
                                     </span>
                                 </label>
+                                <label class="btn btn-sm btn-primary btn-simple" onclick="changeCanvas(1)" id="1">
+                                    <input type="radio" class="d-none d-sm-none" name="options">
+                                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Регистраций</span>
+                                    <span class="d-block d-sm-none">
+                                        <i class="tim-icons icon-simple-add"></i>
+                                    </span>
+                                </label>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="chart-area">
-                        <canvas id="lineChartExample"></canvas>
+                        <canvas id="loggercanvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h5 class="card-category">Общая статистика</h5>
+                    <h2 class="card-title">Приложения</h2>
+                </div>
+                <div class="card-body">
+                    <div class="chart-area">
+                        <canvas id="fullexperience"></canvas>
                     </div>
                 </div>
             </div>
@@ -158,33 +175,41 @@ function update(params, spantext) {
     });
 }
 </script> --}}
+
 <script src="{{ asset('black') }}/js/plugins/chartjs.min.js"></script>
 <script>
-    let type_id_login = {{$canvas[0]}};
-    let type_id_register = {{$canvas[1]}};
-    let type_id_loadingnailsjobs = {{$canvas[2]}};
-    let type_id_redirecttoinstagram = {{$canvas[3]}};
-    let type_id_addfavoritenailsjobs = {{$canvas[4]}};
+    const type_id_login = {{$canvas[0]}};
+    const type_id_register = {{$canvas[1]}};
+    const type_id_loadingnailsjobs = {{$canvas[2]}};
+    const type_id_redirecttoinstagram = {{$canvas[3]}};
+    const type_id_addfavoritenailsjobs = {{$canvas[4]}};
+    const loggercanvascountselectoption = document.getElementById('loggercanvascountselectoption');
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
     function changeCanvas(x) {
         switch(x) {
             case 0:
-                myChart.data.datasets[0].data = type_id_login;
+                myChartLogger.data.datasets[0].data = type_id_login;
+                loggercanvascountselectoption.innerHTML = '<i class="tim-icons icon-button-power text-success"></i>' + type_id_login.reduce(reducer);
                 break;
             case 1:
-                myChart.data.datasets[0].data = type_id_register;
+                myChartLogger.data.datasets[0].data = type_id_register;
+                loggercanvascountselectoption.innerHTML = '<i class="tim-icons icon-send text-success"></i>' + type_id_register.reduce(reducer);
                 break;
             case 2:
-                myChart.data.datasets[0].data = type_id_loadingnailsjobs;
+                myChartLogger.data.datasets[0].data = type_id_loadingnailsjobs;
+                loggercanvascountselectoption.innerHTML = '<i class="tim-icons icon-cloud-download-93 text-success"></i>' + type_id_loadingnailsjobs.reduce(reducer);
                 break;
             case 3:
-                myChart.data.datasets[0].data = type_id_redirecttoinstagram;
+                myChartLogger.data.datasets[0].data = type_id_redirecttoinstagram;
+                loggercanvascountselectoption.innerHTML = '<i class="tim-icons icon-tap-02 text-success"></i>' + type_id_redirecttoinstagram.reduce(reducer);
                 break;
             case 4:
-                myChart.data.datasets[0].data = type_id_addfavoritenailsjobs;
+                myChartLogger.data.datasets[0].data = type_id_addfavoritenailsjobs;
+                loggercanvascountselectoption.innerHTML = '<i class="tim-icons icon-simple-add text-success"></i>' + type_id_addfavoritenailsjobs.reduce(reducer);
                 break;
         }
-        myChart.update();
+        myChartLogger.update();
     }
 
 
@@ -236,15 +261,65 @@ function update(params, spantext) {
          }
     };
 
-    var ctx = document.getElementById("lineChartExample").getContext("2d");
+    gradientChartOptionsConfigurationexperience =  {
+      maintainAspectRatio: false,
+      legend: {
+            display: false
+       },
 
-    var gradientStroke = ctx.createLinearGradient(0,230,0,50);
+       tooltips: {
+         backgroundColor: '#fff',
+         titleFontColor: '#333',
+         bodyFontColor: '#666',
+         bodySpacing: 4,
+         xPadding: 12,
+         mode: "nearest",
+         intersect: 0,
+         position: "nearest"
+       },
+       responsive: true,
+       scales:{
+         yAxes: [{
+           barPercentage: 1.6,
+               gridLines: {
+                 drawBorder: false,
+                   color: 'rgba(29,140,248,0.0)',
+                   zeroLineColor: "transparent",
+               },
+               ticks: {
+                 suggestedMin:50,
+                 suggestedMax: 110,
+                   padding: 20,
+                   fontColor: "#9a9a9a"
+               }
+             }],
+
+         xAxes: [{
+           barPercentage: 1.25,
+               gridLines: {
+                 drawBorder: false,
+                   color: 'rgba(220,53,69,0.1)',
+                   zeroLineColor: "transparent",
+               },
+               ticks: {
+                   padding: 20,
+                   fontColor: "#9a9a9a"
+               }
+             }]
+         }
+    };
+
+    var ctxlogger = document.getElementById("loggercanvas").getContext("2d");
+    var ctxexperience = document.getElementById("fullexperience").getContext("2d");
+
+    var gradientStroke = ctxlogger.createLinearGradient(0,230,0,50);
+    var gradientStroke = ctxexperience.createLinearGradient(0,230,0,50);
 
     gradientStroke.addColorStop(1, 'rgba(72,72,176,0.2)');
     gradientStroke.addColorStop(0.2, 'rgba(72,72,176,0.0)');
     gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
 
-    var data = {
+    var datalogger = {
       labels: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
       datasets: [{
         label: "",
@@ -265,10 +340,45 @@ function update(params, spantext) {
       }]
     };
 
-    var myChart = new Chart(ctx, {
+    var dataexperience = {
+      labels: [
+        @foreach ($fullexperiencearray as $name => $value)
+            '{{__('canvas.'. $name)}}',
+        @endforeach
+      ],
+      datasets: [{
+        label: "",
+        fill: true,
+        backgroundColor: gradientStroke,
+        borderColor: '#d048b6',
+        borderWidth: 2,
+        borderDash: [],
+        borderDashOffset: 0.0,
+        pointBackgroundColor: '#d048b6',
+        pointBorderColor:'rgba(255,255,255,0)',
+        pointHoverBackgroundColor: '#d048b6',
+        pointBorderWidth: 20,
+        pointHoverRadius: 4,
+        pointHoverBorderWidth: 15,
+        pointRadius: 4,
+        data: [
+            @foreach ($fullexperiencearray as $name => $value)
+                {{$value}},
+            @endforeach
+        ],
+      }]
+    };
+
+    var myChartLogger = new Chart(ctxlogger, {
       type: 'line',
-      data: data,
+      data: datalogger,
       options: gradientChartOptionsConfiguration
+    });
+
+    var myChartExperience = new Chart(ctxexperience, {
+      type: 'bar',
+      data: dataexperience,
+      options: gradientChartOptionsConfigurationexperience
     });
 </script>
 
