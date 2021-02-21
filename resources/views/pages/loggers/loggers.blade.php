@@ -64,7 +64,7 @@
                     <div class="row">
                         <div class="col-sm-6 text-left">
                             <h3 class="card-category">Полная статистика действий</h3>
-                            <h2 class="card-title"><i class="tim-icons icon-send text-success"></i> {{$loggers->count()}}</h2>
+                            <h2 class="card-title"><i class="tim-icons icon-send text-success"></i> {{$loggers->total()}}</h2>
                         </div>
                         <div class="col-sm-6">
                             <div class="btn-group btn-group-toggle float-right"  data-toggle="buttons">

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\LoggerShow;
-use App\Services\Logger\iLoggerConfig;
 use Carbon\Carbon;
+use App\Services\Paginator\PaginateForCollection;
 use Illuminate\Http\Request;
 
 class LoggerShowController extends Controller
@@ -16,7 +16,7 @@ class LoggerShowController extends Controller
 
     public function index()
     {
-        $logger = LoggerShow::orderByDesc('created_at')->with('user', 'nailsJobs')->paginate(30);
+        $logger = LoggerShow::orderByDesc('created_at')->with('user', 'nailsJobs')->get();
 
         $today_tour = Carbon::now();
         $carbon_statistik_add = Carbon::create($today_tour->format('Y'), 1, 1, 00, 0, 0);
@@ -34,7 +34,7 @@ class LoggerShowController extends Controller
 
         // dd($type_id_login, $logger);
 
-        return view('pages.loggers.loggers', ['loggers' => $logger, 'canvas' => [
+        return view('pages.loggers.loggers', ['loggers' => PaginateForCollection::paginate($logger, 10) , 'canvas' => [
             json_encode($type_id_login,JSON_NUMERIC_CHECK),
             json_encode($type_id_register,JSON_NUMERIC_CHECK),
             json_encode($type_id_loadingnailsjobs,JSON_NUMERIC_CHECK),
@@ -42,4 +42,6 @@ class LoggerShowController extends Controller
             json_encode($type_id_addfavoritenailsjobs,JSON_NUMERIC_CHECK),
         ]]);
     }
+
+
 }
