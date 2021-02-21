@@ -313,11 +313,15 @@ function update(params, spantext) {
     var ctxexperience = document.getElementById("fullexperience").getContext("2d");
 
     var gradientStroke = ctxlogger.createLinearGradient(0,230,0,50);
-    var gradientStroke = ctxexperience.createLinearGradient(0,230,0,50);
+    var gradientStrokeexperience = ctxexperience.createLinearGradient(0,230,0,50);
 
     gradientStroke.addColorStop(1, 'rgba(72,72,176,0.2)');
     gradientStroke.addColorStop(0.2, 'rgba(72,72,176,0.0)');
     gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
+
+    gradientStrokeexperience.addColorStop(1, 'rgba(72,72,176,0.2)');
+    gradientStrokeexperience.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStrokeexperience.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
 
     var datalogger = {
       labels: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
@@ -349,8 +353,8 @@ function update(params, spantext) {
       datasets: [{
         label: "",
         fill: true,
-        backgroundColor: gradientStroke,
-        borderColor: '#d048b6',
+        backgroundColor: gradientStrokeexperience,
+        borderColor: '#1f8ef1',
         borderWidth: 2,
         borderDash: [],
         borderDashOffset: 0.0,
