@@ -295,7 +295,7 @@ function update(params, spantext) {
              }],
 
          xAxes: [{
-           barPercentage: 1.25,
+           barPercentage: 1,
                gridLines: {
                  drawBorder: false,
                    color: 'rgba(220,53,69,0.1)',
