@@ -34,7 +34,7 @@ class LoggerShowController extends Controller
 
         // dd($type_id_login, $logger);
 
-        return view('pages.loggers.loggers', ['loggers' => PaginateForCollection::paginate($logger, 10) , 'canvas' => [
+        return view('pages.loggers.loggers', ['loggers' => PaginateForCollection::paginate($logger, 30) , 'canvas' => [
             json_encode($type_id_login,JSON_NUMERIC_CHECK),
             json_encode($type_id_register,JSON_NUMERIC_CHECK),
             json_encode($type_id_loadingnailsjobs,JSON_NUMERIC_CHECK),
