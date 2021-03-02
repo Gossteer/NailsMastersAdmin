@@ -33,7 +33,6 @@ class MasterAdminController extends Controller
 
         //$masters = //Master::all(); //Http::withToken(Auth::user()->token)->get(config('api.server_1.get.MasterIndex'))->json();
 
-
         return view('pages.masters.masters', ['masters' => UserMaster::whereNotNull('master_id')->get()->sortByDesc('master.created_at')]);
     }
 
