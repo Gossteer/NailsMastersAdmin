@@ -19,14 +19,14 @@ class UsersTableSeeder extends Seeder
             'name' => 'Admin Admin',
             'email' => 'admin@admin.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('OniOna232NaNa_GossteerOn'),
+            'password' => Hash::make('123'),
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('users')->insert([
             'id' => 2,
             'name' => 'Admin Admin',
-            'email' => 'user@admin',
+            'email' => 'user@user.com',
             'email_verified_at' => now(),
             'password' => Hash::make('123'),
             'created_at' => now(),

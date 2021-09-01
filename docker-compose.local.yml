@@ -1,0 +1,77 @@
+# Update file with correct Docker image paths (from file .gitlab-ci.yml), map folders, port mapping
+
+# map port from Docker host to [container](https://docs.docker.com/compose/compose-file/).
+# If you going to have access from "world" to stage you should define public port.
+# For example: we want to public nginx to world, to do this add port-mapping instruction in service nginx,
+# but you should use variable "NGINX" instead certain TCP port. By default port will generated from range 20000-30000.
+# Generate a random port (s) is performed in Ansible-playbook deploy_staging.yml.
+# See documentation for deploy_staging.yml for more information.
+version: "3.9"
+
+services:
+ # NGINX container
+  nailsmastersadmin:
+    container_name: ${APP_NAME}
+    restart: unless-stopped
+    build:
+        context: .docker/local/nginx
+        dockerfile: Dockerfile
+    restart: 'unless-stopped'
+    ports:
+        - 88:80
+    volumes:
+        - .:/var/www/${APP_NAME}
+        - .docker/local/nginx/logs:/var/log/nginx
+    links:
+        - php
+    depends_on:
+        - mysql
+    networks:
+        - nailsmastersadmin_network
+
+        # PHP FastCGI Process Manager container
+  php:
+    container_name: ${APP_NAME}-php
+    restart: unless-stopped
+    links:
+      - mysql
+    build:
+        context: .
+        dockerfile: .docker/local/php/Dockerfile
+        args:
+          - APP_ENV=${APP_ENV}
+          - APP_NAME=${APP_NAME}
+    volumes:
+        - .:/var/www/${APP_NAME}
+        - .docker/local/php/php.ini:/usr/local/etc/php/php.ini
+    networks:
+        - nailsmastersadmin_network
+
+    # MySQL container
+  mysql:
+    container_name: ${APP_NAME}-mysql
+    restart: unless-stopped
+    build:
+      context: .docker/local/mysql
+      dockerfile: Dockerfile
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+        - 3310:3306
+    networks:
+        - nailsmastersadmin_network
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  nailsmastersadmin_network:
+      driver: bridge
+
+

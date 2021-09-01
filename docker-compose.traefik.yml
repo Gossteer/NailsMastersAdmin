@@ -1,0 +1,78 @@
+# Update file with correct Docker image paths (from file .gitlab-ci.yml), map folders, port mapping
+
+# map port from Docker host to [container](https://docs.docker.com/compose/compose-file/).
+# If you going to have access from "world" to stage you should define public port.
+# For example: we want to public nginx to world, to do this add port-mapping instruction in service nginx,
+# but you should use variable "NGINX" instead certain TCP port. By default port will generated from range 20000-30000.
+# Generate a random port (s) is performed in Ansible-playbook deploy_staging.yml.
+# See documentation for deploy_staging.yml for more information.
+version: "3.9"
+
+services:
+ # NGINX container
+  nailsmastersadmin:
+    container_name: ${APP_NAME}
+    restart: unless-stopped
+    build:
+        context: .docker/traefik/nginx
+        dockerfile: Dockerfile
+    restart: 'unless-stopped'
+    volumes:
+        - .:/var/www/${APP_NAME}
+        - .docker/traefik/nginx/logs:/var/log/nginx
+    links:
+        - php
+    depends_on:
+        - mysql
+    labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.${APP_NAME}.rule=Host(`${DOMAIN}`)"
+        - "traefik.http.routers.${APP_NAME}.entrypoints=websecure"
+        - "traefik.http.routers.${APP_NAME}.tls.certresolver=myresolver"
+        - "traefik.http.routers.${APP_NAME}.tls.domains[0].main=${DOMAIN}"
+        - "traefik.http.routers.${APP_NAME}.tls.domains[0].sans=www.${DOMAIN}"
+
+        # PHP FastCGI Process Manager container
+  php:
+    container_name: ${APP_NAME}-php
+    restart: unless-stopped
+    links:
+      - mysql
+    build:
+        context: .
+        dockerfile: .docker/traefik/php/Dockerfile
+        args:
+          - APP_ENV=${APP_ENV}
+          - APP_NAME=${APP_NAME}
+    volumes:
+        - .:/var/www/${APP_NAME}
+        - .docker/traefik/php/php.ini:/usr/traefik/etc/php/php.ini
+    labels:
+        - traefik.enable=false
+
+    # MySQL container
+  mysql:
+    container_name: ${APP_NAME}-mysql
+    restart: unless-stopped
+    hostname: mysql
+    build:
+      context: .docker/traefik/mysql
+      dockerfile: Dockerfile
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    labels:
+        - traefik.enable=false
+
+networks:
+  default:
+    external:
+      name: traefik
+
+volumes:
+  mysql_data:
+    driver: local

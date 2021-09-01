@@ -49,6 +49,6 @@ class MasterPoint extends Model
 
     public function getImageAttribute($value)
     {
-        return 'http://nailsmasterstest.com.xsph.ru/'.Storage::url($value);
+        return 'https://nailsmasters.gossteer.ru'.Storage::url($value);
     }
 }
