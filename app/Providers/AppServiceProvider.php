@@ -6,6 +6,7 @@ use App\Services\Logger\iLoggerConfig;
 use App\Services\Logger\LoggerConfig;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,7 +17,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+        if(config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
     }
 
     /**
