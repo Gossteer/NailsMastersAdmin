@@ -51,28 +51,28 @@ services:
         - traefik.enable=false
 
     # MySQL container
-  mysql:
-    container_name: ${APP_NAME}-mysql
-    restart: unless-stopped
-    hostname: mysql
-    build:
-      context: .docker/traefik/mysql
-      dockerfile: Dockerfile
-    volumes:
-      - mysql_data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_USER: ${DB_USERNAME}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-    labels:
-        - traefik.enable=false
+  # mysql:
+  #   container_name: ${APP_NAME}-mysql
+  #   restart: unless-stopped
+  #   hostname: mysql
+  #   build:
+  #     context: .docker/traefik/mysql
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - mysql_data:/var/lib/mysql
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+  #     MYSQL_DATABASE: ${DB_DATABASE}
+  #     MYSQL_USER: ${DB_USERNAME}
+  #     MYSQL_PASSWORD: ${DB_PASSWORD}
+  #   labels:
+  #       - traefik.enable=false
 
 networks:
   default:
     external:
       name: traefik
 
-volumes:
-  mysql_data:
-    driver: local
+# volumes:
+#   mysql_data:
+#     driver: local
