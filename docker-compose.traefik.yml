@@ -22,8 +22,6 @@ services:
         - .docker/traefik/nginx/logs:/var/log/nginx
     links:
         - php
-    depends_on:
-        - mysql
     labels:
         - "traefik.enable=true"
         - "traefik.http.routers.${APP_NAME}.rule=Host(`${DOMAIN}`)"
@@ -36,8 +34,6 @@ services:
   php:
     container_name: ${APP_NAME}-php
     restart: unless-stopped
-    links:
-      - mysql
     build:
         context: .
         dockerfile: .docker/traefik/php/Dockerfile
@@ -50,29 +46,7 @@ services:
     labels:
         - traefik.enable=false
 
-    # MySQL container
-  # mysql:
-  #   container_name: ${APP_NAME}-mysql
-  #   restart: unless-stopped
-  #   hostname: mysql
-  #   build:
-  #     context: .docker/traefik/mysql
-  #     dockerfile: Dockerfile
-  #   volumes:
-  #     - mysql_data:/var/lib/mysql
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-  #     MYSQL_DATABASE: ${DB_DATABASE}
-  #     MYSQL_USER: ${DB_USERNAME}
-  #     MYSQL_PASSWORD: ${DB_PASSWORD}
-  #   labels:
-  #       - traefik.enable=false
-
 networks:
   default:
     external:
       name: traefik
-
-# volumes:
-#   mysql_data:
-#     driver: local
